@@ -1,3 +1,6 @@
+<?php 
+    include('classes/class.mercadopago.php');
+?>
 <!DOCTYPE html>
 <html class="supports-animation supports-columns svg no-touch no-ie no-oldie no-ios supports-backdrop-filter as-mouseuser" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
@@ -156,6 +159,31 @@
 <?php 
     if(isset($_POST['submit'])) {
         echo "me clickearon";
+        $data = array(
+            "item" => array(
+                "id" => $_POST['id'],
+                "title" => $_POST['title'],
+                "description" => $_POST['desc'],
+                "img" => $_POST['img'],
+                "cant" => $_POST['unit'],
+                "price" => $_POST['price'],
+            ),
+            "payer" => array(
+                "email" => "test_user_63274575@testuser.com",
+                "name" => "Lalo",
+                "surname" => "Landa",
+                "area_code" => "11",
+                "phone_number" => "22223333",
+                "street_name" => "False",
+                "street_number" => "123",
+                "zip_code" => "1111"
+            ),
+        );
+
+        $mp = new MP();
+        $result = $mp->payment($data);
+        print_r($result);
+
     }
 
 ?>
