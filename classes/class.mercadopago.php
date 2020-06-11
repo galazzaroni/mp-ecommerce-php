@@ -14,6 +14,8 @@ class MP {
         public function payment($data) {
             $preference = new MercadoPago\Preference();
             $item = new MercadoPago\Item();
+            $item->id = $data['item']['id'];
+            $item->description = $data['item']['description'];
             $item->title = $data['item']['title'];
             $item->picture_url = 'https://galazzaroni-mp-commerce-php.herokuapp.com/'.$data['item']['img'];
             $item->quantity = (int)$data['item']['cant'];
