@@ -15,7 +15,9 @@ class MP {
             $preference = new MercadoPago\Preference();
             $item = new MercadoPago\Item();
             $item->title = $data['item']['title'];
+            $item->picture_url = 'https://galazzaroni-mp-commerce-php.herokuapp.com/'.$data['item']['img'];
             $item->quantity = (int)$data['item']['cant'];
+            $item->currency_id = "ARS";
             $item->unit_price = 1;
 
             $payer = new MercadoPago\Payer();
