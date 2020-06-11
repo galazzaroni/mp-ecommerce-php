@@ -1,5 +1,8 @@
 <?php 
     include 'classes/class.mercadopago.php';
+    ob_start();
+
+
 ?>
 <!DOCTYPE html>
 <html class="supports-animation supports-columns svg no-touch no-ie no-oldie no-ios supports-backdrop-filter as-mouseuser" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,6 +17,8 @@
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
+    <script src="https://www.mercadopago.com/v2/security.js" view="home"></script>
+
 
     <link rel="stylesheet" href="./assets/category-landing.css" media="screen, print">
 
@@ -44,7 +49,8 @@
 
 
 
-<body class="as-theme-light-heroimage">
+
+    <body class="as-theme-light-heroimage">
 
     <div class="stack">
         
@@ -90,7 +96,7 @@
                             </div>
                         </div>
                         <div class="as-accessories-results  as-search-desktop">
-                            <form action="" method="post">
+                            <form method="post">
                                 <div class="width:60%">
                                     <div class="as-producttile-tilehero with-paddlenav " style="float:left;">
                                         <div class="as-dummy-container as-dummy-img">
@@ -136,7 +142,13 @@
                                                 <?php echo  "$" . $_POST['unit'] ?>
                                             </h3>
                                         </div>
-                                        <button type="submit" name="submit"  class="mercadopago-button" formmethod="post">Pagar</button>
+                                        <input type="hidden" name="id" value="<?php echo $_POST['id']; ?>">
+                                        <input type="hidden" name="title" value="<?php echo $_POST['title']; ?>">
+                                        <input type="hidden" name="desc" value="<?php echo $_POST['desc']; ?>">
+                                        <input type="hidden" name="img" value="<?php echo $_POST['img']; ?>">
+                                        <input type="hidden" name="unit" value="<?php echo $_POST['unit']; ?>">
+                                        <input type="hidden" name="price" value="<?php echo $_POST['price']; ?>">
+                                        <input type="submit" name="submit" value="Pagar" />
                                     </div>
                                 </div>
                             </form>
@@ -157,16 +169,23 @@
 </div><div class="mp-mercadopago-checkout-wrapper" style="z-index:-2147483647;display:block;background:rgba(0, 0, 0, 0.7);border:0;overflow:hidden;visibility:hidden;margin:0;padding:0;position:fixed;left:0;top:0;width:0;opacity:0;height:0;transition:opacity 220ms ease-in;"> <svg class="mp-spinner" viewBox="25 25 50 50"> <circle class="mp-spinner-path" cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10"></circle> </svg> </div><div class="mp-mercadopago-checkout-wrapper" style="z-index:-2147483647;display:block;background:rgba(0, 0, 0, 0.7);border:0;overflow:hidden;visibility:hidden;margin:0;padding:0;position:fixed;left:0;top:0;width:0;opacity:0;height:0;transition:opacity 220ms ease-in;"> <svg class="mp-spinner" viewBox="25 25 50 50"> <circle class="mp-spinner-path" cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10"></circle> </svg> </div><div class="mp-mercadopago-checkout-wrapper" style="z-index:-2147483647;display:block;background:rgba(0, 0, 0, 0.7);border:0;overflow:hidden;visibility:hidden;margin:0;padding:0;position:fixed;left:0;top:0;width:0;opacity:0;height:0;transition:opacity 220ms ease-in;"> <svg class="mp-spinner" viewBox="25 25 50 50"> <circle class="mp-spinner-path" cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10"></circle> </svg> </div><div class="mp-mercadopago-checkout-wrapper" style="z-index:-2147483647;display:block;background:rgba(0, 0, 0, 0.7);border:0;overflow:hidden;visibility:hidden;margin:0;padding:0;position:fixed;left:0;top:0;width:0;opacity:0;height:0;transition:opacity 220ms ease-in;"> <svg class="mp-spinner" viewBox="25 25 50 50"> <circle class="mp-spinner-path" cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10"></circle> </svg> </div><div class="mp-mercadopago-checkout-wrapper" style="z-index:-2147483647;display:block;background:rgba(0, 0, 0, 0.7);border:0;overflow:hidden;visibility:hidden;margin:0;padding:0;position:fixed;left:0;top:0;width:0;opacity:0;height:0;transition:opacity 220ms ease-in;"> <svg class="mp-spinner" viewBox="25 25 50 50"> <circle class="mp-spinner-path" cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10"></circle> </svg> </div><div class="mp-mercadopago-checkout-wrapper" style="z-index:-2147483647;display:block;background:rgba(0, 0, 0, 0.7);border:0;overflow:hidden;visibility:hidden;margin:0;padding:0;position:fixed;left:0;top:0;width:0;opacity:0;height:0;transition:opacity 220ms ease-in;"> <svg class="mp-spinner" viewBox="25 25 50 50"> <circle class="mp-spinner-path" cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10"></circle> </svg> </div><div id="ac-gn-viewport-emitter"> </div></body></html>
 
 <?php 
+    print_r($_POST);
+    $id = $_POST['id'];
+    $title = $_POST['title'];
+    $desc = $_POST['desc'];
+    $img = $_POST['img'];
+    $cant = $_POST['unit'];
+    $price = $_POST['price'];
+
     if(isset($_POST['submit'])) {
-        echo "me clickearon";
         $data = array(
             "item" => array(
-                "id" => $_POST['id'],
-                "title" => $_POST['title'],
-                "description" => $_POST['desc'],
-                "img" => $_POST['img'],
-                "cant" => $_POST['unit'],
-                "price" => $_POST['price'],
+                "id" => $id,
+                "title" => $title,
+                "description" => $desc,
+                "img" => $img,
+                "cant" => $cant,
+                "price" => $price,
             ),
             "payer" => array(
                 "email" => "test_user_63274575@testuser.com",
@@ -182,7 +201,8 @@
 
         $mp = new MP();
         $result = $mp->payment($data);
-        print_r($result);
+        $url = $result->init_point;
+        header("Location: " . $url);
 
     }
 
